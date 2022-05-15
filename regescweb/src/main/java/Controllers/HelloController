@@ -1,0 +1,11 @@
+package br.com.ifsp.regescweb.controllers;
+
+@Controller
+public class HelloControllers{
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";  // o Spring vai renderizar o arquivo templates/hello.html
+    }
+
+}
