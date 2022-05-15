@@ -6,10 +6,13 @@ import br.com.ifsp.regescweb.models.StatusProfessor;
 import br.com.ifsp.regescweb.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
+
+import javax.validation.Valid;
 
 @Controller
 public class ProfessorController {
@@ -34,10 +37,17 @@ public class ProfessorController {
     }
 
     @PostMapping("/professores")
-    public String create(RequisicaoNovoProfessor requisicao){
-        Professor professor = requisicao.toProfessor();
-        this.professorRepository.save(professor);
+    public String create(@Valid RequisicaoNovoProfessor requisicao, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            System.out.println("\n************* TEM ERROS ***************\n");
 
-        return "redirect:/professores";
+            return "redirect:/professor/new";
+        }
+        else {
+            Professor professor = requisicao.toProfessor();
+            this.professorRepository.save(professor);
+
+            return "redirect:/professores";
+        }
     }
 }

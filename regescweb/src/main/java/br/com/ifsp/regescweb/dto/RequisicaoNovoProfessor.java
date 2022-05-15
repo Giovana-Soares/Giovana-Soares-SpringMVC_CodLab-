@@ -2,11 +2,17 @@ package br.com.ifsp.regescweb.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+
 import br.com.ifsp.regescweb.models.Professor;
 import br.com.ifsp.regescweb.models.StatusProfessor;
 
 public class RequisicaoNovoProfessor {
+    @NotNull
     private String nome; 
+    @DecimalMin("0.0")
+    @NotNull
     private BigDecimal salario;
     private StatusProfessor statusProfessor;
     
