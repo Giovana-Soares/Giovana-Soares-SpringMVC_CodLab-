@@ -8,15 +8,13 @@ public class Professor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     private String nome;
     private BigDecimal salario;
-
     @Enumerated(EnumType.STRING)
     private StatusProfessor statusProfessor;
 
-    public Professor(){ }
+    public Professor() {  }
 
     public Professor(String nome, BigDecimal salario, StatusProfessor statusProfessor) {
         this.nome = nome;
@@ -58,8 +56,11 @@ public class Professor {
 
     @Override
     public String toString() {
-        return "Professor{" + "id=" +id + ",nome=" +nome + "\"" + ", salario=" +salario + ", statusProfessor = " + statusProfessor + "}";
+        return "Professor{" +
+               "id=" + id +
+               ", nome='" + nome + '\'' +
+               ", salario=" + salario +
+               ", statusProfessor=" + statusProfessor +
+               '}';
     }
-
-    
 }

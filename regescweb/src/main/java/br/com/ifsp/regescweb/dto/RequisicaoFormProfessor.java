@@ -1,21 +1,23 @@
 package br.com.ifsp.regescweb.dto;
 
-import java.math.BigDecimal;
-
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-
 import br.com.ifsp.regescweb.models.Professor;
 import br.com.ifsp.regescweb.models.StatusProfessor;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+
+// É uma classe DTO (Data Transfer Object)
 public class RequisicaoFormProfessor {
+    @NotBlank
     @NotNull
-    private String nome; 
+    private String nome; // em caso de erro, NotBlank.requisicaoNovoProfessor.nome
+    @NotNull
     @DecimalMin("0.0")
-    @NotNull
     private BigDecimal salario;
     private StatusProfessor statusProfessor;
-    
+
     public String getNome() {
         return nome;
     }
@@ -40,13 +42,22 @@ public class RequisicaoFormProfessor {
         this.statusProfessor = statusProfessor;
     }
 
-    public Professor toProfessor(){
+
+    public Professor toProfessor() {
         Professor professor = new Professor();
         professor.setNome(this.nome);
         professor.setSalario(this.salario);
         professor.setStatusProfessor(this.statusProfessor);
-    
-        return professor; 
+
+        return professor;
+    }
+
+
+    public Professor toProfessor(Professor professor) {
+        professor.setNome(this.nome);
+        professor.setSalario(this.salario);
+        professor.setStatusProfessor(this.statusProfessor);
+        return professor;
     }
 
     public void fromProfessor(Professor professor) {
@@ -54,14 +65,13 @@ public class RequisicaoFormProfessor {
         this.salario = professor.getSalario();
         this.statusProfessor = professor.getStatusProfessor();
     }
-    
+
     @Override
     public String toString() {
         return "RequisicaoNovoProfessor{" +
-                "nome='" + nome + '\'' +
-                ", statusProfessor=" + statusProfessor +
-                ", salario=" + salario +
-                '}';
+               "nome='" + nome + '\'' +
+               ", salario=" + salario +
+               ", statusProfessor=" + statusProfessor +
+               '}';
     }
-    
 }
