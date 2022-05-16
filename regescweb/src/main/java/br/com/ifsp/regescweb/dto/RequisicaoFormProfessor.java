@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import br.com.ifsp.regescweb.models.Professor;
 import br.com.ifsp.regescweb.models.StatusProfessor;
 
-public class RequisicaoNovoProfessor {
+public class RequisicaoFormProfessor {
     @NotNull
     private String nome; 
     @DecimalMin("0.0")
@@ -49,6 +49,12 @@ public class RequisicaoNovoProfessor {
         return professor; 
     }
 
+    public void fromProfessor(Professor professor) {
+        this.nome = professor.getNome();
+        this.salario = professor.getSalario();
+        this.statusProfessor = professor.getStatusProfessor();
+    }
+    
     @Override
     public String toString() {
         return "RequisicaoNovoProfessor{" +
